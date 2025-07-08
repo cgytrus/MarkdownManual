@@ -1,6 +1,7 @@
 package li.cil.manual.client.document.segment;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import li.cil.manual.api.render.FontRenderer;
 import li.cil.manual.client.document.DocumentRenderer;
@@ -80,7 +81,7 @@ public class TextSegment extends AbstractSegment {
         final Optional<InteractiveSegment> interactive = getInteractiveParent();
         final ObjectReference<Optional<InteractiveSegment>> hovered = new ObjectReference<>(Optional.empty());
 
-        final BufferBuilder builder = Tesselator.getInstance().getBuilder();
+        final ByteBufferBuilder builder = Tesselator.getInstance().buffer;
         final MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(builder);
 
         forEachBlock(segmentX, lineHeight, documentWidth, block -> {

@@ -28,7 +28,7 @@ subprojects {
     apply(plugin = rootProject.libs.plugins.architectury.get().pluginId)
     apply(plugin = rootProject.libs.plugins.loom.get().pluginId)
 
-    version = "${modVersion}+${getGitRef()}"
+    version = "${modVersion}"
     group = mavenGroup
     base.archivesName.set("${modId}-MC${minecraftVersion}-${project.name}")
 
@@ -62,8 +62,8 @@ subprojects {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     tasks {
@@ -75,7 +75,7 @@ subprojects {
 
         withType<JavaCompile>().configureEach {
             options.encoding = "utf-8"
-            options.release.set(17)
+            options.release.set(21)
         }
     }
 
