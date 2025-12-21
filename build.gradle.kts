@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.loom) apply false
     alias(libs.plugins.shadow) apply false
     alias(libs.plugins.spotless)
+    `maven-publish`
 }
 
 val modId: String by project
@@ -28,7 +29,7 @@ subprojects {
     apply(plugin = rootProject.libs.plugins.architectury.get().pluginId)
     apply(plugin = rootProject.libs.plugins.loom.get().pluginId)
 
-    version = "${modVersion}"
+    version = modVersion
     group = mavenGroup
     base.archivesName.set("${modId}-MC${minecraftVersion}-${project.name}")
 
@@ -97,6 +98,7 @@ val projectConfigurations = mapOf(
 for (platform in enabledPlatforms.split(',')) {
     project(":$platform") {
         apply(plugin = rootProject.libs.plugins.shadow.get().pluginId)
+        apply(plugin = "maven-publish")
 
         architectury {
             platformSetupLoomIde()
@@ -144,6 +146,22 @@ for (platform in enabledPlatforms.split(',')) {
 
             jar {
                 archiveClassifier.set("dev")
+            }
+        }
+
+        publishing {
+            publications {
+                create<MavenPublication>("maven") {
+                    groupId = "li.cil"
+                    artifactId = "manual"
+                    version = "MC$minecraftVersion-$platform-$modVersion"
+
+                    from(components["java"])
+                }
+            }
+
+            repositories {
+                mavenLocal()
             }
         }
 
