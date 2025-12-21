@@ -1,6 +1,5 @@
 package li.cil.manual.client.document.segment;
 
-import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import li.cil.manual.api.render.FontRenderer;
