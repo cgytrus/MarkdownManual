@@ -23,7 +23,7 @@ public final class Constants {
     // ----------------------------------------------------------------------- //
 
     private static <T> ResourceKey<Registry<T>> key(final String name) {
-        return ResourceKey.createRegistryKey(ResourceLocation.tryBuild(MOD_ID, name));
+        return ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MOD_ID, name));
     }
 
     // ----------------------------------------------------------------------- //

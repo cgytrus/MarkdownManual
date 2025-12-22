@@ -16,15 +16,15 @@ public interface ManualScreenStyle {
     };
 
     default ResourceLocation getWindowBackground() {
-        return ResourceLocation.tryBuild(Constants.MOD_ID, "textures/gui/manual.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/manual.png");
     }
 
     default ResourceLocation getScrollButtonTexture() {
-        return ResourceLocation.tryBuild(Constants.MOD_ID, "textures/gui/scroll_button.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/scroll_button.png");
     }
 
     default ResourceLocation getTabButtonTexture() {
-        return ResourceLocation.tryBuild(Constants.MOD_ID, "textures/gui/tab_button.png");
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/tab_button.png");
     }
 
     default Rect2i getWindowRect() {
