@@ -179,6 +179,6 @@ spotless {
         endWithNewline()
         trimTrailingWhitespace()
         removeUnusedImports()
-        indentWithSpaces()
+        leadingTabsToSpaces()
     }
 }
