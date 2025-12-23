@@ -46,6 +46,7 @@ jobs:
         name: Upload API Artifacts
         id: upload-api
         with:
+          name: markdown_manual-api
           path: ./common/build/libs/*-api.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
 
@@ -53,6 +54,7 @@ jobs:
         name: Upload Fabric Artifacts
         id: upload-fabric
         with:
+          name: markdown_manual-fabric
           path: ./fabric/build/libs/*.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
 
@@ -60,5 +62,6 @@ jobs:
         name: Upload NeoForge Artifacts
         id: upload-neoforge
         with:
+          name: markdown_manual-neoforge
           path: ./neoforge/build/libs/*.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
