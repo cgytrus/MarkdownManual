@@ -43,11 +43,19 @@ jobs:
           rm neoforge/build/libs/*-dev-shadow.jar
 
       - uses: actions/upload-artifact@v4
-        name: Upload Artifacts
+        name: Upload API Artifacts
         id: upload-artifacts
         with:
-          name: jar-files
-          path: |
-            ./common/build/libs/*-api.jar
-            ./fabric/build/libs/*.jar
-            ./neoforge/build/libs/*.jar
+          path: ./common/build/libs/*-api.jar
+
+      - uses: actions/upload-artifact@v4
+        name: Upload Fabric Artifacts
+        id: upload-artifacts
+        with:
+          path: ./fabric/build/libs/*.jar
+
+      - uses: actions/upload-artifact@v4
+        name: Upload NeoForge Artifacts
+        id: upload-artifacts
+        with:
+          path: ./neoforge/build/libs/*.jar
