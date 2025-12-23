@@ -29,7 +29,7 @@ subprojects {
     apply(plugin = rootProject.libs.plugins.architectury.get().pluginId)
     apply(plugin = rootProject.libs.plugins.loom.get().pluginId)
 
-    version = modVersion
+    version = "${modVersion}+${getGitRef()}"
     group = mavenGroup
     base.archivesName.set("${modId}-MC${minecraftVersion}-${project.name}")
 

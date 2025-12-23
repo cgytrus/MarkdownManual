@@ -44,18 +44,21 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         name: Upload API Artifacts
-        id: upload-artifacts
+        id: upload-api
         with:
           path: ./common/build/libs/*-api.jar
+        if: ${{ matrix.os == 'ubuntu-latest' }}
 
       - uses: actions/upload-artifact@v4
         name: Upload Fabric Artifacts
-        id: upload-artifacts
+        id: upload-fabric
         with:
           path: ./fabric/build/libs/*.jar
+        if: ${{ matrix.os == 'ubuntu-latest' }}
 
       - uses: actions/upload-artifact@v4
         name: Upload NeoForge Artifacts
-        id: upload-artifacts
+        id: upload-neoforge
         with:
           path: ./neoforge/build/libs/*.jar
+        if: ${{ matrix.os == 'ubuntu-latest' }}
