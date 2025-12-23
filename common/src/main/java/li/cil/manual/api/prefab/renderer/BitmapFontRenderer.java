@@ -7,7 +7,9 @@ import it.unimi.dsi.fastutil.chars.Char2IntMap;
 import it.unimi.dsi.fastutil.chars.Char2IntOpenHashMap;
 import li.cil.manual.api.render.FontRenderer;
 import li.cil.manual.api.util.Constants;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -181,13 +183,16 @@ public abstract class BitmapFontRenderer implements FontRenderer {
     }
 
     private static final class FontRenderTypes extends RenderType {
+        private static final RenderStateShard.ShaderStateShard POSITION_TEX_COLOR_SHADER =
+            new RenderStateShard.ShaderStateShard(GameRenderer::getPositionTexColorShader);
+
         public static RenderType create(final ResourceLocation texture) {
             return create(Constants.MOD_ID + "/bitmap_font",
                 DefaultVertexFormat.POSITION_TEX_COLOR,
                 VertexFormat.Mode.QUADS, 256,
                 false, false,
                 CompositeState.builder()
-                    .setShaderState(ShaderStateShard.POSITION_TEX_SHADER)
+                    .setShaderState(POSITION_TEX_COLOR_SHADER)
                     .setTextureState(new TextureStateShard(texture, false, false))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setWriteMaskState(COLOR_WRITE)
