@@ -43,25 +43,43 @@ jobs:
           rm neoforge/build/libs/*-dev-shadow.jar
 
       - uses: actions/upload-artifact@v4
-        name: Upload API Artifacts
+        name: Upload API Build
         id: upload-api
         with:
           name: markdown_manual-api
           path: ./common/build/libs/*-api.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
+        continue-on-error: true
 
       - uses: actions/upload-artifact@v4
-        name: Upload Fabric Artifacts
+        name: Upload Fabric Build
         id: upload-fabric
         with:
           name: markdown_manual-fabric
           path: ./fabric/build/libs/*.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
+        continue-on-error: true
 
       - uses: actions/upload-artifact@v4
-        name: Upload NeoForge Artifacts
+        name: Upload NeoForge Build
         id: upload-neoforge
         with:
           name: markdown_manual-neoforge
           path: ./neoforge/build/libs/*.jar
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        continue-on-error: true
+
+      - name: Update Development Release
+        uses: andelf/nightly-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: dev
+          name: 'Development Release'
+          body: |
+            Markdown Manual development release for commit ${{ github.sha }}.
+          files: |
+            ./common/build/libs/*-api.jar
+            ./fabric/build/libs/*.jar
+            ./neoforge/build/libs/*.jar
         if: ${{ matrix.os == 'ubuntu-latest' }}
