@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.loom) apply false
     alias(libs.plugins.shadow) apply false
     alias(libs.plugins.spotless)
-    `maven-publish`
+    `maven-publish` apply false
 }
 
 val modId: String by project
@@ -162,6 +162,14 @@ for (platform in enabledPlatforms.split(',')) {
 
             repositories {
                 mavenLocal()
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/cgytrus/MarkdownManual")
+                    credentials {
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
+                    }
+                }
             }
         }
 

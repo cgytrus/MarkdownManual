@@ -10,8 +10,7 @@ jobs:
     strategy:
       matrix:
         java: [ 21 ]
-        os: [ ubuntu-latest, windows-latest ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Set up JDK ${{ matrix.java }}
@@ -34,8 +33,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
+      - name: Build
         run: ./gradlew build
+
+      - name: Publish package
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Remove shadow JARs
         run: |
@@ -48,8 +52,6 @@ jobs:
         with:
           name: markdown_manual-api
           path: ./common/build/libs/*-api.jar
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        continue-on-error: true
 
       - uses: actions/upload-artifact@v4
         name: Upload Fabric Build
@@ -57,8 +59,6 @@ jobs:
         with:
           name: markdown_manual-fabric
           path: ./fabric/build/libs/*.jar
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        continue-on-error: true
 
       - uses: actions/upload-artifact@v4
         name: Upload NeoForge Build
@@ -66,8 +66,6 @@ jobs:
         with:
           name: markdown_manual-neoforge
           path: ./neoforge/build/libs/*.jar
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        continue-on-error: true
 
       - name: Update Development Release
         uses: andelf/nightly-release@v1
@@ -82,4 +80,3 @@ jobs:
             ./common/build/libs/*-api.jar
             ./fabric/build/libs/*.jar
             ./neoforge/build/libs/*.jar
-        if: ${{ matrix.os == 'ubuntu-latest' }}
