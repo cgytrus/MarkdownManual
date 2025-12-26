@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.loom) apply false
     alias(libs.plugins.shadow) apply false
     alias(libs.plugins.spotless)
-    `maven-publish` apply false
+    `maven-publish`
 }
 
 val modId: String by project
